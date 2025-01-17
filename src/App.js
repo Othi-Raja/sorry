@@ -4,7 +4,9 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import './App.css';
-
+import {  toast } from "react-toastify";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
 function App() {
   const [loading, setLoading] = useState(true);
   const [password, setPassword] = useState("");
@@ -12,9 +14,10 @@ function App() {
   const [error, setError] = useState("");
 
   // Default password
-  const defaultPassword = "defaultPassword";
+  const defaultPassword = "janani1020";
 
   useEffect(() => {
+    AOS.init();
     const handleLoad = () => {
       const timer = setTimeout(() => {
         setLoading(false);
@@ -40,13 +43,28 @@ function App() {
   };
 
   const handleSubmit = () => {
-    if (password === defaultPassword) {
+    if (password.toLowerCase() === defaultPassword) {
       window.open("https://www.example.com", "_blank"); // Open a new tab with the specified URL
     } else {
       setError("Invalid password");
     }
   };
+const toastify= ()=> toast(`Here is Your Hint, the Password Is Your Name + DayMont (xxxx)`, {
+  
+  position: "top-center",
+  autoClose: false,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  theme: "light",
+  style:{
+    textAlign: "center",
+  }
+  
 
+  });
   return (
     <div style={{ height: '100vh' }}>
       {loading ? (
@@ -64,6 +82,9 @@ function App() {
             label="Password"
             type={showPassword ? 'text' : 'password'}
             variant="standard"
+            data-aos="fade-in" 
+              data-aos-duration="200"
+                data-aos-delay="100"
             value={password}
             onChange={handlePasswordChange}
             error={!!error}
@@ -80,11 +101,14 @@ function App() {
                 </InputAdornment>
               ),
             }}
-            fullWidth
+            
           />
-          <Button variant="contained"  onClick={handleSubmit} style={{ marginTop: '16px' }}>
-            Submit
+          
+          <Button   data-aos="fade-in"   data-aos-delay="200"  data-aos-duration="600"   className="bg-black border-0 mt-3 text-white px-4"  onClick={handleSubmit} style={{ marginTop: '16px' }}>
+            Submit 
           </Button>
+          <Button   data-aos="fade-in"    data-aos-delay="300"   data-aos-duration="900" className= "small "style={{color:'grey'}} disableRipple  onClick={()=> toastify()}> Hint</Button>
+
         </Container>
       )}
     </div>
