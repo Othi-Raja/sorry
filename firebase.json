@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "portfolioformdata-4caae",
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
